@@ -12,15 +12,15 @@ class AutoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index()
     {
-        //
+        return Auto::all();
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): Response
+    public function create()
     {
         //
     }
@@ -28,7 +28,7 @@ class AutoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         //
     }
@@ -36,7 +36,7 @@ class AutoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Auto $auto): Response
+    public function show(Auto $auto)
     {
         //
     }
@@ -44,7 +44,7 @@ class AutoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Auto $auto): Response
+    public function edit(Auto $auto)
     {
         //
     }
@@ -52,7 +52,7 @@ class AutoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Auto $auto): RedirectResponse
+    public function update(Request $request, Auto $auto)
     {
         //
     }
@@ -60,7 +60,7 @@ class AutoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Auto $auto): RedirectResponse
+    public function destroy(Auto $auto)
     {
         //
     }

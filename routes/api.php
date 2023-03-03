@@ -28,3 +28,6 @@ Route::resource('alumnos', AlumnosController::class)
 
 Route::resource('tags', TagController::class)
 ->names('tags');
+
+Route::resource('autos', AutoController::class)
+->names('autos');

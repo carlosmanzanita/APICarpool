@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AlumnosController;
+use App\Http\Controllers\AutoController;
 use App\Http\Controllers\ModalidadController;
+use App\Http\Controllers\PanicoController;
 use App\Http\Controllers\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,3 +33,6 @@ Route::resource('tags', TagController::class)
 
 Route::resource('autos', AutoController::class)
 ->names('autos');
+
+Route::resource('panico', PanicoController::class)
+->names('panico');

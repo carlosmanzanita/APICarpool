@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AlumnosSeeder::class);
         $this->call(TagSeeder::class);
         $this->call(AutoSeeder::class);
+        $this->call(PanicoSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

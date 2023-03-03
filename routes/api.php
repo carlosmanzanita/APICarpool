@@ -36,3 +36,6 @@ Route::resource('autos', AutoController::class)
 
 Route::resource('panico', PanicoController::class)
 ->names('panico');
+
+Route::resource('destino', PanicoController::class)
+->names('destino');

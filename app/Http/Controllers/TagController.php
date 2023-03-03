@@ -12,15 +12,15 @@ class TagController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index()
     {
-        //
+        return Tag::all();
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): Response
+    public function create()
     {
         //
     }
@@ -28,7 +28,7 @@ class TagController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         //
     }
@@ -36,7 +36,7 @@ class TagController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Tag $tag): Response
+    public function show(Tag $tag)
     {
         //
     }
@@ -44,7 +44,7 @@ class TagController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tag $tag): Response
+    public function edit(Tag $tag)
     {
         //
     }
@@ -52,7 +52,7 @@ class TagController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tag $tag): RedirectResponse
+    public function update(Request $request, Tag $tag)
     {
         //
     }
@@ -60,7 +60,7 @@ class TagController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tag $tag): RedirectResponse
+    public function destroy(Tag $tag)
     {
         //
     }

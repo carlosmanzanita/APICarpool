@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AlumnosController;
 use App\Http\Controllers\ModalidadController;
+use App\Http\Controllers\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,6 @@ Route::resource('modalidades', ModalidadController::class)
 
 Route::resource('alumnos', AlumnosController::class)
 ->names('alumnos');
+
+Route::resource('tags', TagController::class)
+->names('tags');

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlumnosController;
 use App\Http\Controllers\ModalidadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::resource('modalidades', ModalidadController::class)
 ->names('modalidades');
+
+Route::resource('alumnos', AlumnosController::class)
+->names('alumnos');

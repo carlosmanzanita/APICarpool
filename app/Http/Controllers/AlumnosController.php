@@ -12,15 +12,15 @@ class AlumnosController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index()
     {
-        //
+        return Alumnos::all();
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): Response
+    public function create()
     {
         //
     }
@@ -28,7 +28,7 @@ class AlumnosController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         //
     }
@@ -36,7 +36,7 @@ class AlumnosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Alumnos $alumnos): Response
+    public function show(Alumnos $alumnos)
     {
         //
     }
@@ -44,7 +44,7 @@ class AlumnosController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Alumnos $alumnos): Response
+    public function edit(Alumnos $alumnos)
     {
         //
     }
@@ -52,7 +52,7 @@ class AlumnosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Alumnos $alumnos): RedirectResponse
+    public function update(Request $request, Alumnos $alumnos)
     {
         //
     }
@@ -60,7 +60,7 @@ class AlumnosController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Alumnos $alumnos): RedirectResponse
+    public function destroy(Alumnos $alumnos)
     {
         //
     }

@@ -36,9 +36,10 @@ class ConfirmarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Confirmar $confirmar)
+    public function show($confirmar_id)
     {
-        //
+        $confirmar = Confirmar::find($confirmar_id);
+        return $confirmar;
     }
 
     /**

@@ -3,12 +3,15 @@
 use App\Http\Controllers\AlumnosController;
 use App\Http\Controllers\AutoController;
 use App\Http\Controllers\AventonController;
+use App\Http\Controllers\AventonTagController;
 use App\Http\Controllers\ConfirmarController;
 use App\Http\Controllers\DestinoController;
 use App\Http\Controllers\DestinoemergenteController;
 use App\Http\Controllers\EncuentroController;
 use App\Http\Controllers\ModalidadController;
 use App\Http\Controllers\PanicoController;
+use App\Http\Controllers\PieController;
+use App\Http\Controllers\PieTagController;
 use App\Http\Controllers\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -61,3 +64,12 @@ Route::resource('aventon', AventonController::class)
 
 Route::resource('confirmar', ConfirmarController::class)
 ->names('confirmar');
+
+Route::resource('pie', PieController::class)
+->names('pie');
+
+Route::resource('aventon-tag', AventonTagController::class)
+->names('aventon-tag');
+
+Route::resource('pie-tag', PieTagController::class)
+->names('pie-tag');

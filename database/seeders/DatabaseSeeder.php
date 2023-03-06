@@ -24,6 +24,9 @@ class DatabaseSeeder extends Seeder
         $this->call(DestinoemergenteSeeder::class);
         $this->call(AventonSeeder::class);
         $this->call(ConfirmarSeeder::class);
+        $this->call(PieSeeder::class);
+        $this->call(AventonTagSeeder::class);
+        $this->call(PieTagSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

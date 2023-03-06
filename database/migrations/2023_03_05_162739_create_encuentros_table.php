@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('panicos', function (Blueprint $table) {    
+        Schema::create('encuentros', function (Blueprint $table) {
             $table->id();
-            $table->time('hora');
-            $table->string('ubicacion');
-            $table->foreignId('alumno_id')->references('id')->on('alumnos');
+            $table->string('nombre');
+            $table->string('descripcion');
+            $table->string('latitud');
+            $table->string('longitud');
+            $table->string('tipo');
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('panicos');
+        Schema::dropIfExists('encuentros');
     }
 };

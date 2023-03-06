@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Destino;
+use App\Models\Confirmar;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class DestinoController extends Controller
+class ConfirmarController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-
     {
-        return Destino::all();
+        return Confirmar::all();
     }
 
     /**
@@ -37,7 +36,7 @@ class DestinoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Destino $destino)
+    public function show(Confirmar $confirmar)
     {
         //
     }
@@ -45,7 +44,7 @@ class DestinoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Destino $destino)
+    public function edit(Confirmar $confirmar)
     {
         //
     }
@@ -53,7 +52,7 @@ class DestinoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Destino $destino)
+    public function update(Request $request, Confirmar $confirmar)
     {
         //
     }
@@ -61,7 +60,7 @@ class DestinoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Destino $destino)
+    public function destroy(Confirmar $confirmar)
     {
         //
     }

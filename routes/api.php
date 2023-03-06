@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AlumnosController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\AutoController;
 use App\Http\Controllers\AventonController;
 use App\Http\Controllers\AventonTagController;

@@ -10,59 +10,53 @@ use Illuminate\Http\Response;
 class ModalidadController extends Controller
 {
     /**
-     * Muestra todas las modalidades
+     * Muestra todas las modalidades GET
      */
     public function index()
     {
-        return Modalidad::all();
+        return Modalidad::where('baja',0)->get();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
-     * Store a newly created resource in storage.
+     *almacena una nueva modalidad POST
      */
     public function store(Request $request)
     {
-        //
+        $modalidad = Modalidad::create($request->all());
+        return $modalidad;
     }
 
-    /**
-     * Display the specified resource.
+    /*
+     * Muestra una modalidad por ID GET
      */
     public function show($modalidad_id)
     {
-        $modalidad = Modalidad::find($modalidad_id);
+        $modalidad = Modalidad::where('baja',0)->where('id',$modalidad_id)->get();
         return $modalidad;
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Actualiza una modalidad por ID. PUT
      */
-    public function edit(Modalidad $modalidad)
+    public function update(Request $request, $modalidad_id)
     {
-        //
+        $modalidad = Modalidad::find($modalidad_id);
+        $modalidad->update($request->all());
+        $modalidad->save();
+        return $modalidad;
+
     }
 
     /**
-     * Update the specified resource in storage.
+     * Elima una modalidad por ID. DELETE
      */
-    public function update(Request $request, Modalidad $modalidad)
-    {
-        //
-    }
+    public function destroy($modalidad_id)
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Modalidad $modalidad)
     {
-        //
+        $modalidad = Modalidad::find($modalidad_id);
+        $modalidad->baja=1;
+        $modalidad->save();
+        return true;
     }
 }

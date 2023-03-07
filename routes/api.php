@@ -37,6 +37,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::resource('modalidades', ModalidadController::class)
+->middleware('auth:sanctum')
 ->names('modalidades');
 
 Route::resource('alumnos', AlumnosController::class)

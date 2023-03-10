@@ -19,43 +19,34 @@ class EncuentroController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     *
+     * Almacena ubicación de punto de encuentro POST
      */
     public function store(Request $request)
     {
-        //
+        $encuentro = Encuentro::create($request->all());
+        return $encuentro;
     }
 
     /**
-     * Display the specified resource.
+     * Muestra un punto de encuentro por ID, GET 
      */
     public function show(Encuentro $encuentro)
     {
-        //
+        $encuentro = Encuentro::where('Punto de encuentro',0)->where('id',$encuentro->id)->get();
+        return $encuentro;
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Encuentro $encuentro)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
+     * Actualiza un punto de encuentro predefinido, PUT 
      */
     public function update(Request $request, Encuentro $encuentro)
     {
-        //
+        $encuentro = Encuentro::find ($encuentro->id);
+        $encuentro->update ($request->all());
+        $encuentro->save();
+        return $encuentro;
+
     }
 
     /**

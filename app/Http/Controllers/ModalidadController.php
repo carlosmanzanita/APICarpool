@@ -10,7 +10,7 @@ use Illuminate\Http\Response;
 class ModalidadController extends Controller
 {
     /**
-     * Muestra todas las modalidades GET
+     * Muestra las modalidades mientras no hayan sido eliminadas. GET
      */
     public function index()
     {
@@ -19,7 +19,7 @@ class ModalidadController extends Controller
 
 
     /**
-     *almacena una nueva modalidad POST
+     *Almacena una nueva modalidad. POST
      */
     public function store(Request $request)
     {
@@ -27,8 +27,8 @@ class ModalidadController extends Controller
         return $modalidad;
     }
 
-    /*
-     * Muestra una modalidad por ID GET
+    /**
+     * Muestra una modalidad por ID. GET
      */
     public function show($modalidad_id)
     {
@@ -49,7 +49,7 @@ class ModalidadController extends Controller
     }
 
     /**
-     * Elima una modalidad por ID. DELETE
+     * Elimina una modalidad por ID. DELETE
      */
     public function destroy($modalidad_id)
 

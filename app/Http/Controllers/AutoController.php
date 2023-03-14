@@ -10,58 +10,50 @@ use Illuminate\Http\Response;
 class AutoController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Muestra los autos mientras no hayan sido eliminados. GET
      */
     public function index()
     {
-        return Auto::all();
+        return Auto::where('baja',0)->get();
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Almacena un nuevo auto. POST
      */
     public function store(Request $request)
     {
-        //
+        $auto = Auto::create($request->all());
+        return $auto;
     }
 
     /**
-     * Display the specified resource.
+     * Muestra un auto por ID. GET
      */
-    public function show(Auto $auto)
+    public function show($auto_id)
     {
-        //
+        $auto = Auto::where('baja',0)->where('id',$auto_id)->get();
+        return $auto;
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Actualiza un auto por ID. PUT
      */
-    public function edit(Auto $auto)
+    public function update(Request $request, $auto_id)
     {
-        //
+        $auto = Auto::find($auto_id);
+        $auto->update($request->all());
+        $auto->save();
+        return $auto;
     }
 
     /**
-     * Update the specified resource in storage.
+     * Elimina un auto por ID. DELETE
      */
-    public function update(Request $request, Auto $auto)
+    public function destroy($auto_id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Auto $auto)
-    {
-        //
+        $auto = Auto::find($auto_id);
+        $auto->baja=1;
+        $auto->save();
+        return true;
     }
 }

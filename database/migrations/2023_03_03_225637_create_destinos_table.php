@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('latitud');
             $table->string('longitud');
             $table->string('tipo');
+            $table->integer('baja')->default(0);
             $table->foreignId('alumno_id')->references('id')->on('alumnos');
             $table->timestamps();
         });

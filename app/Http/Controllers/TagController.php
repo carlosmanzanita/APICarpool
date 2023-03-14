@@ -10,58 +10,53 @@ use Illuminate\Http\Response;
 class TagController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Muestra los tags mientras no hayan sido eliminados. GET
      */
     public function index()
     {
-        return Tag::all();
+        return Tag::where('baja',0)->get();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
-     * Store a newly created resource in storage.
+     *Almacena un nuevo tag. POST
      */
     public function store(Request $request)
     {
-        //
+        $tag = Tag::create($request->all());
+        return $tag;
     }
 
     /**
-     * Display the specified resource.
+     * Muestra un tag por ID. GET
      */
-    public function show(Tag $tag)
+    public function show($tag_id)
     {
-        //
+        $tag = Tag::where('baja',0)->where('id',$tag_id)->get();
+        return $tag;
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Actualiza un tag por ID. PUT
      */
-    public function edit(Tag $tag)
+    public function update(Request $request, $tag_id)
     {
-        //
+        $tag = Tag::find($tag_id);
+        $tag->update($request->all());
+        $tag->save();
+        return $tag;
+
     }
 
     /**
-     * Update the specified resource in storage.
+     * Elimina un tag por ID. DELETE
      */
-    public function update(Request $request, Tag $tag)
-    {
-        //
-    }
+    public function destroy($tag_id)
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Tag $tag)
     {
-        //
+        $tag = Tag::find($tag_id);
+        $tag->baja=1;
+        $tag->save();
+        return true;
     }
 }

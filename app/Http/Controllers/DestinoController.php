@@ -10,59 +10,53 @@ use Illuminate\Http\Response;
 class DestinoController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Muestra los destinos mientras no hayan sido eliminados. GET
      */
     public function index()
-
     {
-        return Destino::all();
+        return Destino::where('baja',0)->get();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
-     * Store a newly created resource in storage.
+     *Almacena un nuevo destino. POST
      */
     public function store(Request $request)
     {
-        //
+        $destino = Destino::create($request->all());
+        return $destino;
     }
 
     /**
-     * Display the specified resource.
+     * Muestra un destino por ID. GET
      */
-    public function show(Destino $destino)
+    public function show($destino_id)
     {
-        //
+        $destino = Destino::where('baja',0)->where('id',$destino_id)->get();
+        return $destino;
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Actualiza un destino por ID. PUT
      */
-    public function edit(Destino $destino)
+    public function update(Request $request, $destino_id)
     {
-        //
+        $destino = Destino::find($destino_id);
+        $destino->update($request->all());
+        $destino->save();
+        return $destino;
+
     }
 
     /**
-     * Update the specified resource in storage.
+     * Elimina un destino por ID. DELETE
      */
-    public function update(Request $request, Destino $destino)
-    {
-        //
-    }
+    public function destroy($destino_id)
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Destino $destino)
     {
-        //
+        $destino = Destino::find($destino_id);
+        $destino->baja=1;
+        $destino->save();
+        return true;
     }
 }

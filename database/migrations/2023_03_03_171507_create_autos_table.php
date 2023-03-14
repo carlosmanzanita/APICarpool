@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('placa');
             $table->string('color');
             $table->string('marca');
+            $table->integer('baja')->default(0);
             $table->foreignId('alumno_id')->references('id')->on('alumnos');
             $table->timestamps();
         });

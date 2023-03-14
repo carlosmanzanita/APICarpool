@@ -11,16 +11,16 @@ use PhpParser\Node\Scalar\Encapsed;
 class EncuentroController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Muestra los puntos de encuentro mientras no hayan sido eliminados. GET
      */
     public function index()
     {
-        return Encuentro::all();
+        return Encuentro::where('baja',0)->get();
     }
 
     /**
      *
-     * Almacena ubicación de punto de encuentro POST
+     * Almacena un nuevo punto de encuentro. POST
      */
     public function store(Request $request)
     {
@@ -29,31 +29,34 @@ class EncuentroController extends Controller
     }
 
     /**
-     * Muestra un punto de encuentro por ID, GET 
+     * Muestra un punto de encuentro por ID. GET 
      */
-    public function show(Encuentro $encuentro)
+    public function show($encuentro_id)
     {
-        $encuentro = Encuentro::where('Punto de encuentro',0)->where('id',$encuentro->id)->get();
+        $encuentro = Encuentro::where('baja',0)->where('id',$encuentro_id)->get();
         return $encuentro;
     }
 
     /**
-     * Actualiza un punto de encuentro predefinido, PUT 
+     * Actualiza un punto de encuentro por ID. PUT 
      */
-    public function update(Request $request, Encuentro $encuentro)
+    public function update(Request $request, $encuentro_id)
     {
-        $encuentro = Encuentro::find ($encuentro->id);
-        $encuentro->update ($request->all());
+        $encuentro = Encuentro::find($encuentro_id);
+        $encuentro->update($request->all());
         $encuentro->save();
         return $encuentro;
 
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina un encuentro por ID. DELETE
      */
-    public function destroy(Encuentro $encuentro)
+    public function destroy($encuentro_id)
     {
-        //
+        $encuentro = Encuentro::find($encuentro_id);
+        $encuentro->baja=1;
+        $encuentro->save();
+        return true;
     }
 }

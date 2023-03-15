@@ -18,13 +18,19 @@ class AuthController extends Controller
      */
     public function createUser(Request $request)
     {
+        
+        
+        
         try {
+            $url = $request->url;
+            $datos_alumno = shell_exec("webscraping.py -u $url");
+            $datos_alumno = json_decode($datos_alumno);
+            // return gettype($datos_alumno);
             //Validando
             $validateUser = Validator::make($request->all(), 
             [
-                'name' => 'required',
                 'email' => 'required|email|unique:users,email',
-                'password' => 'required'
+                'telefono' => 'required',
             ]);
 
             if($validateUser->fails()){
@@ -34,11 +40,12 @@ class AuthController extends Controller
                     'errors' => $validateUser->errors()
                 ], 401);
             }
-
+            $contrasegna = $datos_alumno->nombre.$datos_alumno->boleta.$datos_alumno->carrera;
             $user = User::create([
-                'name' => $request->name,
+                'name' => $datos_alumno->nombre,
                 'email' => $request->email,
-                'password' => Hash::make($request->password)
+                'telefono' => $request->telefono,
+                'password' => Hash::make($contrasegna)
             ]);
 
             return response()->json([
@@ -53,6 +60,7 @@ class AuthController extends Controller
                 'message' => $th->getMessage()
             ], 500);
         }
+        /** */
     }
 
     /**
@@ -63,11 +71,16 @@ class AuthController extends Controller
     public function loginUser(Request $request)
     {
         try {
+            $url = $request->url;
+            $datos_alumno = shell_exec("webscraping.py -u $url");
+            $datos_alumno = json_decode($datos_alumno);
+            $contrasegna = $datos_alumno->nombre.$datos_alumno->boleta.$datos_alumno->carrera;
+
             $validateUser = Validator::make($request->all(), 
             [
                 'email' => 'required|email',
-                'password' => 'required'
             ]);
+
 
             if($validateUser->fails()){
                 return response()->json([
@@ -77,7 +90,10 @@ class AuthController extends Controller
                 ], 401);
             }
 
-            if(!Auth::attempt($request->only(['email', 'password']))){
+            if(!Auth::attempt([
+                'email' => $request->email, 
+                'password' => $contrasegna
+                ])){
                 return response()->json([
                     'status' => false,
                     'message' => 'El e-mail y la contraseña no coinciden con los registros',

@@ -12,14 +12,14 @@ use Illuminate\Support\Facades\Validator;
 class AuthController extends Controller
 {
     /**
-     * Create User
+     * Crear un usuario
      * @param Request $request
      * @return User 
      */
     public function createUser(Request $request)
     {
         try {
-            //Validated
+            //Validando
             $validateUser = Validator::make($request->all(), 
             [
                 'name' => 'required',
@@ -30,7 +30,7 @@ class AuthController extends Controller
             if($validateUser->fails()){
                 return response()->json([
                     'status' => false,
-                    'message' => 'validation error',
+                    'message' => 'Error de validación',
                     'errors' => $validateUser->errors()
                 ], 401);
             }
@@ -43,7 +43,7 @@ class AuthController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'User Created Successfully',
+                'message' => 'Usuario creado satisfactoriamente',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
 
@@ -56,7 +56,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Login The User
+     * Inicio de sesión del usuario
      * @param Request $request
      * @return User
      */
@@ -72,7 +72,7 @@ class AuthController extends Controller
             if($validateUser->fails()){
                 return response()->json([
                     'status' => false,
-                    'message' => 'validation error',
+                    'message' => 'Error de validación',
                     'errors' => $validateUser->errors()
                 ], 401);
             }
@@ -80,7 +80,7 @@ class AuthController extends Controller
             if(!Auth::attempt($request->only(['email', 'password']))){
                 return response()->json([
                     'status' => false,
-                    'message' => 'Email & Password does not match with our record.',
+                    'message' => 'El e-mail y la contraseña no coinciden con los registros',
                 ], 401);
             }
 
@@ -88,10 +88,26 @@ class AuthController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'User Logged In Successfully',
+                'message' => 'El usuario ha iniciado sesión satisfactoriamente',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
 
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
+
+    public function logoutUser(Request $request)
+    {
+        try {
+            $request->user()->currentAccessToken()->delete();
+            return response()->json([
+                'status' => true,
+                'message' => 'El usuario ha cerrado sesión satisfactoriamente y los token han sido eliminados',
+            ], 200);
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,

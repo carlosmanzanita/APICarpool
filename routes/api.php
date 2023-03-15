@@ -28,8 +28,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/auth/register', [AuthController::class, 'createUser']);
-Route::post('/auth/login', [AuthController::class, 'loginUser']);
+Route::post('/auth/iniciarsesion', [AuthController::class, 'loginUser']);
+Route::post('/auth/registro', [AuthController::class, 'createUser']);
+Route::get('/auth/cerrarsesion', [AuthController::class, 'logoutUser'])
+->middleware('auth:sanctum');
 
 Route::apiResource('posts', PostController::class)->middleware('auth:sanctum');
 
@@ -44,18 +46,22 @@ Route::resource('alumnos', AlumnosController::class)
 ->names('alumnos');
 
 Route::resource('tags', TagController::class)
+->middleware('auth:sanctum')
 ->names('tags');
 
 Route::resource('autos', AutoController::class)
+->middleware('auth:sanctum')
 ->names('autos');
 
 Route::resource('panico', PanicoController::class)
 ->names('panico');
 
 Route::resource('destino', DestinoController::class)
+->middleware('auth:sanctum')
 ->names('destino');
 
 Route::resource('encuentro', EncuentroController::class)
+->middleware('auth:sanctum')
 ->names('encuentro');
 
 Route::resource('destinoemergente', DestinoemergenteController::class)

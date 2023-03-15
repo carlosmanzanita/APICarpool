@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('descripcion');
             $table->string('icono');
+            $table->integer('baja')->default(0);
             $table->timestamps();
         });
     }

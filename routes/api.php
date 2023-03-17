@@ -43,6 +43,7 @@ Route::resource('modalidades', ModalidadController::class)
 ->names('modalidades');
 
 Route::resource('alumnos', AlumnosController::class)
+->middleware('auth:sanctum')
 ->names('alumnos');
 
 Route::resource('tags', TagController::class)
@@ -54,6 +55,7 @@ Route::resource('autos', AutoController::class)
 ->names('autos');
 
 Route::resource('panico', PanicoController::class)
+->middleware('auth:sanctum')
 ->names('panico');
 
 Route::resource('destino', DestinoController::class)
@@ -65,19 +67,25 @@ Route::resource('encuentro', EncuentroController::class)
 ->names('encuentro');
 
 Route::resource('destinoemergente', DestinoemergenteController::class)
+->middleware('auth:sanctum')
 ->names('destinoemergente');
 
 Route::resource('aventon', AventonController::class)
+->middleware('auth:sanctum')
 ->names('aventon');
 
 Route::resource('confirmar', ConfirmarController::class)
+->middleware('auth:sanctum')
 ->names('confirmar');
 
 Route::resource('pie', PieController::class)
+->middleware('auth:sanctum')
 ->names('pie');
 
 Route::resource('aventon-tag', AventonTagController::class)
+->middleware('auth:sanctum')
 ->names('aventon-tag');
 
 Route::resource('pie-tag', PieTagController::class)
+->middleware('auth:sanctum')
 ->names('pie-tag');

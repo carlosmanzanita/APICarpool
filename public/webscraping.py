@@ -22,7 +22,8 @@ if args.url:
     carrera = soup.find_all("div",{"class":"carrera"})[0].string
     escuela = soup.find_all("div",{"class":"escuela"})[0].string
     cred = soup.find_all("div",{"class":"cred cok"})[0].string
-    alumno ='{"nombre" : "'+ nombre +'", "boleta" : "'+ boleta + '", "carrera" : "'+ carrera +'", "escuela" : "'+ escuela +'","cred" : "' + cred + '", "src_img" : "'+ src_img +'" }'
+    # alumno ='{"nombre" : "'+ nombre +'", "boleta" : "'+ boleta + '", "carrera" : "'+ carrera +'", "escuela" : "'+ escuela +'","cred" : "' + cred + '", "src_img" : "'+ src_img +'" }'
+    alumno ='{"nombre" : "'+ nombre +'", "boleta" : "'+ boleta + '", "carrera" : "'+ carrera +'", "escuela" : "'+ escuela +'","cred" : "' + cred + '"}'
 
     print(alumno)  
-    # https://servicios.dae.ipn.mx/vcred/?h=5d5fb568d6e4baad9f68be2641a12acebd1fd8fda7a6379580110bfb423f5b8
+    # https://servicios.dae.ipn.mx/vcred/?h=a5a592d479a79d351d325e9544c4bac746db4cb8cac14096b7dd4de42c1257

@@ -28,9 +28,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/auth/iniciarsesion', [AuthController::class, 'loginUser']);
+Route::post('/auth/iniciar-sesion', [AuthController::class, 'loginUser']);
 Route::post('/auth/registro', [AuthController::class, 'createUser']);
-Route::get('/auth/cerrarsesion', [AuthController::class, 'logoutUser'])
+Route::get('/auth/cerrar-sesion', [AuthController::class, 'logoutUser'])
 ->middleware('auth:sanctum');
 
 Route::apiResource('posts', PostController::class)->middleware('auth:sanctum');

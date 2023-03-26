@@ -18,14 +18,12 @@ class AuthController extends Controller
      */
     public function createUser(Request $request)
     {
-        
-        
-        
         try {
             $url = $request->url;
-            $datos_alumno = shell_exec("webscraping.py -u $url");
+            $comando = "python webscraping.py -u $url";
+            $datos_alumno = shell_exec($comando);
             $datos_alumno = json_decode($datos_alumno);
-            // return gettype($datos_alumno);
+
             //Validando
             $validateUser = Validator::make($request->all(), 
             [
@@ -63,6 +61,7 @@ class AuthController extends Controller
         /** */
     }
 
+
     /**
      * Inicio de sesión del usuario
      * @param Request $request
@@ -72,7 +71,8 @@ class AuthController extends Controller
     {
         try {
             $url = $request->url;
-            $datos_alumno = shell_exec("webscraping.py -u $url");
+            $comando = "python webscraping.py -u $url";
+            $datos_alumno = shell_exec($comando);
             $datos_alumno = json_decode($datos_alumno);
             $contrasegna = $datos_alumno->nombre.$datos_alumno->boleta.$datos_alumno->carrera;
 

@@ -24,6 +24,14 @@ class DestinoController extends Controller
     public function store(Request $request)
     {
         $destino = Destino::create($request->all());
+        $res = $request->validate([
+            'nombre'=>'required',
+            'latitud'=>'required',
+            'longitud'=>'required',
+            'tipo'=>'required',
+        ]);
+        // return $res;
+        /**/
         return $destino;
     }
 

@@ -23,6 +23,10 @@ class ModalidadController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nombre' => 'required',
+            'descripcion' => 'required',
+        ]);
         $modalidad = Modalidad::create($request->all());
         return $modalidad;
     }

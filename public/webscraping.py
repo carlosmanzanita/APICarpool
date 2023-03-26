@@ -1,6 +1,7 @@
 #pip install beautifulsoup4
 #pip install lxml
 #pip install html5lib
+#pip install htmlentities
 
 import requests
 import argparse
@@ -19,6 +20,8 @@ if args.url:
     src_img = soup.find_all("div",{"class": "pic"})[1].img['src']
 
     nombre = soup.find_all("div",{"class": "nombre"})[0].string
+    # htmlentities Para ajustar acentos
+    # 'á'   htmlentities  &aquote;
     nombre = htmlentities.encode(nombre)
     boleta = soup.find_all("div",{"class":"boleta"})[0].string 
     boleta = htmlentities.encode(boleta)
@@ -42,9 +45,7 @@ if args.url:
     alumno = alumno + ' , '
     alumno = alumno + '"src_img" : "'+ src_img +'"'
     alumno = alumno + '}'
-    # alumno ='{"nombre" : "'+ nombre +'", "boleta" : "'+ boleta + '", "carrera" : "'+ carrera +'", "escuela" : "'+ escuela +'","cred" : "' + cred + '", "src_img" : "'+ src_img +'" }'
     print(alumno)
-
 
 
     # alumno ='{"nombre" : "'+ nombre +'", "boleta" : "'+ boleta + '", "carrera" : "'+ carrera +'", "escuela" : "'+ escuela +'","cred" : "' + cred + '"}'

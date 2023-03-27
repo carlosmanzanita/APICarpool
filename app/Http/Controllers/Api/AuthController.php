@@ -20,7 +20,12 @@ class AuthController extends Controller
     {
         try {
             $url = $request->url;
+<<<<<<< Updated upstream
             $comando = "python webscraping.py -u $url";
+=======
+            $comando = "webscraping.py -u $url";
+            return $comando;
+>>>>>>> Stashed changes
             $datos_alumno = shell_exec($comando);
             $datos_alumno = json_decode($datos_alumno);
 

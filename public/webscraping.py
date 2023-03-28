@@ -13,11 +13,7 @@ parser.add_argument("-u","--url", help="Indicar la URL de la DAE")
 args = parser.parse_args()
 if args.url:
     url = args.url
-<<<<<<< Updated upstream
     
-=======
-    # url = "https://servicios.dae.ipn.mx/vrced/?h=243689bea3c26dce4c147c9911117f8aed2c63f62e3718e478194ada873de7"
->>>>>>> Stashed changes
     req = requests.get(url)
     
     soup = BeautifulSoup(req.text, "lxml")

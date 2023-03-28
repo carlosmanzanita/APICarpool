@@ -19,22 +19,24 @@ class AuthController extends Controller
     public function createUser(Request $request)
     {
         try {
-            $url = $request->url;
-<<<<<<< Updated upstream
-            $comando = "python webscraping.py -u $url";
-=======
-            $comando = "webscraping.py -u $url";
-            return $comando;
->>>>>>> Stashed changes
-            $datos_alumno = shell_exec($comando);
-            $datos_alumno = json_decode($datos_alumno);
+         
 
             //Validando
             $validateUser = Validator::make($request->all(), 
             [
                 'email' => 'required|email|unique:users,email',
                 'telefono' => 'required',
+                'url' => 'required',
             ]);
+
+            $url = $request->url;
+            $url = explode("=", $url)[1];
+            $url = "https://servicios.dae.ipn.mx/vcred/?h=".$url;
+            $comando = "python webscraping.py -u $url";
+            $datos_alumno = shell_exec($comando);
+            $datos_alumno = json_decode($datos_alumno);
+            // https://servicios.dae.ipn.mx/vcred/?h=a5a592d479a79d351d325e9544c4bac746db4cb8cac14096b7dd4de42c1257
+            // https://www.dae.ipn.mx/vcred/?h=a5a592d479a79d351d325e9544c4bac746db4cb8cac14096b7dd4de42c1257
 
             if($validateUser->fails()){
                 return response()->json([

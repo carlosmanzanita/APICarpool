@@ -19,8 +19,6 @@ class AuthController extends Controller
     public function createUser(Request $request)
     {
         try {
-         
-
             //Validando
             $validateUser = Validator::make($request->all(), 
             [
@@ -77,11 +75,17 @@ class AuthController extends Controller
     public function loginUser(Request $request)
     {
         try {
+            
+
             $url = $request->url;
+            $url = explode("=", $url)[1];
+            $url = "https://servicios.dae.ipn.mx/vcred/?h=".$url;
             $comando = "python webscraping.py -u $url";
             $datos_alumno = shell_exec($comando);
             $datos_alumno = json_decode($datos_alumno);
             $contrasegna = $datos_alumno->nombre.$datos_alumno->boleta.$datos_alumno->carrera;
+
+
 
             $validateUser = Validator::make($request->all(), 
             [
@@ -137,5 +141,11 @@ class AuthController extends Controller
                 'message' => $th->getMessage()
             ], 500);
         }
+    }
+
+    public function verSesion()
+    {
+        $usuario = Auth::user();
+        return $usuario;
     }
 }

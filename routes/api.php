@@ -35,6 +35,9 @@ Route::post('/auth/registro', [AuthController::class, 'createUser']);
 Route::get('/auth/cerrar-sesion', [AuthController::class, 'logoutUser'])
 ->middleware('auth:sanctum');
 
+Route::get('/auth/ver-sesion', [AuthController::class, 'verSesion'])
+->middleware('auth:sanctum');
+
 Route::apiResource('posts', PostController::class)->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Pie extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'user_id',
+        'encuentro_id',
+        'destino_id',
+        'confirmar_id'
+    ];
 }

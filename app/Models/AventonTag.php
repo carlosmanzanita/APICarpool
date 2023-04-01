@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class AventonTag extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'aventon_id',
+        'tag_id',
+    ];
 }

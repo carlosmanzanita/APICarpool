@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Confirmar extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'confirma'
+    ];
 }

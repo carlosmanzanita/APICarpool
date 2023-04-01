@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Panico extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'hora',
+        'ubicacion',
+        'user_id'   
+    ];
 }

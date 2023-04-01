@@ -6,6 +6,8 @@ use App\Models\Auto;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class AutoController extends Controller
 {
@@ -14,7 +16,8 @@ class AutoController extends Controller
      */
     public function index()
     {
-        return Auto::where('baja',0)->get();
+        $user = Auth::user();
+        return Auto::where('baja',0)->where('user_id', $user->id)->get();
     }
 
     /**
@@ -22,8 +25,35 @@ class AutoController extends Controller
      */
     public function store(Request $request)
     {
-        $auto = Auto::create($request->all());
-        return $auto;
+
+        try {
+            $user = Auth::user();
+            $auto_nuevo = [
+                'tipo' => $request->tipo,
+                'placa' => $request->placa,
+                'color' => $request->color,
+                'marca' => $request->marca,
+                'user_id' => $user->id,
+            ];
+            $auto = Auto::create($auto_nuevo);
+            
+            $validate = Validator::make($request->all(), 
+            [
+                'tipo' => 'required',
+                'placa' => 'required',
+                'color' => 'required',
+                'marca' => 'required',
+                'user_id' => 'required',
+            ]);
+
+            return $auto;
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
     }
 
     /**
@@ -31,7 +61,8 @@ class AutoController extends Controller
      */
     public function show($auto_id)
     {
-        $auto = Auto::where('baja',0)->where('id',$auto_id)->get();
+        $user = Auth::user();
+        $auto = Auto::where('baja',0)->where('id',$auto_id)->where('user_id', $user->id)->get();
         return $auto;
     }
 
@@ -40,10 +71,37 @@ class AutoController extends Controller
      */
     public function update(Request $request, $auto_id)
     {
-        $auto = Auto::find($auto_id);
-        $auto->update($request->all());
-        $auto->save();
-        return $auto;
+        try {
+            $validate = Validator::make($request->all(), 
+            [
+                'tipo' => 'required',
+                'placa' => 'required',
+                'color' => 'required',
+                'marca' => 'required',
+                'user_id' => 'required',
+            ]);
+
+            $user = Auth::user();
+            $auto_editado = [
+                'tipo' => $request->tipo,
+                'placa' => $request->placa,
+                'color' => $request->color,
+                'marca' => $request->marca,
+                'user_id' => $user->id,
+            ];
+            
+            $auto = Auto::find($auto_id);
+            $auto->update($auto_editado);
+            $auto->save();
+            
+            return $auto;
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
     }
 
     /**
@@ -51,7 +109,9 @@ class AutoController extends Controller
      */
     public function destroy($auto_id)
     {
-        $auto = Auto::find($auto_id);
+        
+        $user = Auth::user();
+        $auto = Auto::where('user_id', $user->id)->where('id', $auto_id)->first();
         $auto->baja=1;
         $auto->save();
         return true;

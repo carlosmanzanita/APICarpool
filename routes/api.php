@@ -47,10 +47,6 @@ Route::resource('modalidades', ModalidadController::class)
 ->middleware('auth:sanctum')
 ->names('modalidades');
 
-Route::resource('alumnos', AlumnosController::class)
-->middleware('auth:sanctum')
-->names('alumnos');
-
 Route::resource('tags', TagController::class)
 ->middleware('auth:sanctum')
 ->names('tags');

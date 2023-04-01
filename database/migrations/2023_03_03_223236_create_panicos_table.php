@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->time('hora');
             $table->string('ubicacion');
-            $table->foreignId('alumno_id')->references('id')->on('alumnos');
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

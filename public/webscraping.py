@@ -41,9 +41,9 @@ if args.url:
     alumno = alumno + ' , '
     alumno = alumno + '"escuela" : "'+ escuela +'"'
     alumno = alumno + ' , '
-    alumno = alumno + '"cred" : "'+ cred +'"'
+    alumno = alumno + '"vigencia" : "'+ cred +'"'
     alumno = alumno + ' , '
-    alumno = alumno + '"src_img" : "'+ src_img +'"'
+    alumno = alumno + '"foto" : "'+ src_img +'"'
     alumno = alumno + '}'
     print(alumno)
 

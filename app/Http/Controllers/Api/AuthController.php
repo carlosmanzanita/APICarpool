@@ -27,12 +27,21 @@ class AuthController extends Controller
                 'url' => 'required',
             ]);
 
+            
+            /****webscraping*****/
+            /****webscraping*****/
+            /****webscraping*****/
             $url = $request->url;
             $url = explode("=", $url)[1];
             $url = "https://servicios.dae.ipn.mx/vcred/?h=".$url;
             $comando = "python webscraping.py -u $url";
             $datos_alumno = shell_exec($comando);
             $datos_alumno = json_decode($datos_alumno);
+            
+            /****webscraping*****/
+            /****webscraping*****/
+            /****webscraping*****/
+
             // https://servicios.dae.ipn.mx/vcred/?h=a5a592d479a79d351d325e9544c4bac746db4cb8cac14096b7dd4de42c1257
             // https://www.dae.ipn.mx/vcred/?h=a5a592d479a79d351d325e9544c4bac746db4cb8cac14096b7dd4de42c1257
 
@@ -45,9 +54,15 @@ class AuthController extends Controller
             }
             $contrasegna = $datos_alumno->nombre.$datos_alumno->boleta.$datos_alumno->carrera;
             $user = User::create([
-                'name' => $datos_alumno->nombre,
-                'email' => $request->email,
+                'email' => $request->email, //$request es lo que escribe o manda el usuario
                 'telefono' => $request->telefono,
+
+                'name' => $datos_alumno->nombre, //$datos_alumno es lo que se extrae de la credencial
+                'boleta' => $datos_alumno->boleta,
+                'carrera' => $datos_alumno->carrera,
+                'escuela' => $datos_alumno->escuela,
+                'vigencia' => $datos_alumno->vigencia,
+                'foto' => $datos_alumno->foto,
                 'password' => Hash::make($contrasegna)
             ]);
 

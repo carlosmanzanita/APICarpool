@@ -2,6 +2,7 @@
 #pip install lxml
 #pip install html5lib
 #pip install htmlentities
+#pip install requests
 
 import requests
 import argparse

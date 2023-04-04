@@ -6,6 +6,8 @@ use App\Models\Destino;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class DestinoController extends Controller
 {
@@ -23,16 +25,31 @@ class DestinoController extends Controller
      */
     public function store(Request $request)
     {
-        $destino = Destino::create($request->all());
-        $res = $request->validate([
-            'nombre'=>'required',
-            'latitud'=>'required',
-            'longitud'=>'required',
-            'tipo'=>'required',
-        ]);
-        // return $res;
-        /**/
+        try{
+        $user = Auth::user();
+        $destino_nuevo = [
+            'nombre' => $request->nombre,
+            'latitud' => $request->latitud,
+            'longitud' => $request->longitud,
+            'tipo' => $request->tipo,
+            'user_id' => $user->id,
+        ];
+        $destino = Destino::create($destino_nuevo);
+
+        $validate = Validator::make($request->all(), 
+            [
+                'nombre' => 'required',
+                'latitud' => 'required',
+                'longitud' => 'required',
+                'tipo' => 'required'
+            ]);
         return $destino;
+        } catch(\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
     }
 
     /**

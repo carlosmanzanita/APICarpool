@@ -13,5 +13,6 @@ class Destino extends Model
         'latitud',
         'longitud',
         'tipo',
+        'user_id'
     ];
 }

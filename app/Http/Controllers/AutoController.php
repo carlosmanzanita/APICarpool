@@ -109,7 +109,6 @@ class AutoController extends Controller
      */
     public function destroy($auto_id)
     {
-        
         $user = Auth::user();
         $auto = Auto::where('user_id', $user->id)->where('id', $auto_id)->first();
         $auto->baja=1;

@@ -62,7 +62,7 @@ class AutoController extends Controller
     public function show($auto_id)
     {
         $user = Auth::user();
-        $auto = Auto::where('baja',0)->where('id',$auto_id)->where('user_id', $user->id)->get();
+        $auto = Auto::where('baja',0)->where('id',$auto_id)->where('user_id', $user->id)->first();
         return $auto;
     }
 

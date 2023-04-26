@@ -57,7 +57,7 @@ class DestinoController extends Controller
      */
     public function show($destino_id)
     {
-        $destino = Destino::where('baja',0)->where('id',$destino_id)->get();
+        $destino = Destino::where('baja',0)->where('id',$destino_id)->first();
         return $destino;
     }
 

@@ -31,7 +31,7 @@ class DestinoController extends Controller
             'nombre' => $request->nombre,
             'latitud' => $request->latitud,
             'longitud' => $request->longitud,
-            'tipo' => $request->tipo,
+            //'tipo' => $request->tipo,
             'user_id' => $user->id,
         ];
         $destino = Destino::create($destino_nuevo);
@@ -41,7 +41,7 @@ class DestinoController extends Controller
                 'nombre' => 'required',
                 'latitud' => 'required',
                 'longitud' => 'required',
-                'tipo' => 'required'
+                //'tipo' => 'required'
             ]);
         return $destino;
         } catch(\Throwable $th) {

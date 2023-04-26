@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('latitud');
             $table->string('longitud');
-            $table->string('tipo');
+            //$table->string('tipo');
             $table->integer('baja')->default(0);
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();

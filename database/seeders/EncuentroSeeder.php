@@ -28,25 +28,46 @@ class EncuentroSeeder extends Seeder
             'tipo' => 'A pie'
         ]);
         Encuentro::create([
-            'nombre' => 'punto de encuentro 1',
-            'descripcion' => 'Edificio de Gobierno',
-            'latitud' => '19.328857911610612',
-            'longitud' => '-99.11092798763877',
+            'nombre' => 'punto de encuentro 3',
+            'descripcion' => 'Salid Cafetales',
+            'latitud' => '19.329180971835818',
+            'longitud' => '-99.11035806788107',
             'tipo' => 'A pie'
         ]);
         Encuentro::create([
-            'nombre' => 'punto de encuentro 1',
-            'descripcion' => 'Edificio de Gobierno',
-            'latitud' => '19.328857911610612',
-            'longitud' => '-99.11092798763877',
+            'nombre' => 'punto de encuentro 4',
+            'descripcion' => 'Papelería ESIME',
+            'latitud' => '19.33012805142718',
+            'longitud' => '-99.11279306474404',
             'tipo' => 'A pie'
         ]);
         Encuentro::create([
-            'nombre' => 'punto de encuentro 1',
-            'descripcion' => 'Edificio de Gobierno',
-            'latitud' => '19.328857911610612',
-            'longitud' => '-99.11092798763877',
-            'tipo' => 'A pie'
+            'nombre' => 'punto de encuentro 5',
+            'descripcion' => 'Estacionamiento 1',
+            'latitud' => '19.32877644393895',
+            'longitud' => '-99.11263676074815',
+            'tipo' => 'Aventon'
+        ]);
+        Encuentro::create([
+            'nombre' => 'punto de encuentro 6',
+            'descripcion' => 'Estacionamiento 2',
+            'latitud' => '19.329302896469038',
+            'longitud' => '-99.112567023313',
+            'tipo' => 'Aventon'
+        ]);
+        Encuentro::create([
+            'nombre' => 'punto de encuentro 7',
+            'descripcion' => 'Estacionamiento 3',
+            'latitud' => '19.329804037205044',
+            'longitud' => '--99.11258848098588',
+            'tipo' => 'Aventon'
+        ]);
+        Encuentro::create([
+            'nombre' => 'punto de encuentro 8',
+            'descripcion' => 'Las peras',
+            'latitud' => '19.32860686511847',
+            'longitud' => '-99.11263676074815',
+            'tipo' => 'Aventon'
         ]);
     }
 }

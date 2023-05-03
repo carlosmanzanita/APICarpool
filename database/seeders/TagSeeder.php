@@ -37,5 +37,17 @@ class TagSeeder extends Seeder
             'nombre' => 'Toretto',
             'descripcion' => 'Este usuario suele manejar rápido. Si le temes a la velocidad, tomalo en cuenta',
         ]);
+        Tag::create([
+            'nombre' => '5 minutos',
+            'descripcion' => 'Tiempo de tolerancia',
+        ]);
+        Tag::create([
+            'nombre' => '10 minutos',
+            'descripcion' => 'Tiempo de tolerancia',
+        ]);
+        Tag::create([
+            'nombre' => '15 minutos',
+            'descripcion' => 'Tiempo de tolerancia',
+        ]);
     }
 }

@@ -9,6 +9,7 @@ class Encuentro extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'id',
         'nombre',
         'descripcion',
         'latitud',

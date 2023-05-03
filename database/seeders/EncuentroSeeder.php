@@ -14,6 +14,7 @@ class EncuentroSeeder extends Seeder
     public function run(): void
     {
         Encuentro::create([
+            'id' => '1',
             'nombre' => 'punto de encuentro 1',
             'descripcion' => 'Edificio de Gobierno',
             'latitud' => '19.328857911610612',
@@ -21,6 +22,7 @@ class EncuentroSeeder extends Seeder
             'tipo' => 'A pie'
         ]);
         Encuentro::create([
+            'id' => '2',
             'nombre' => 'punto de encuentro 2',
             'descripcion' => 'Salida Av. Santa Ana',
             'latitud' => ' 19.328517007701326',
@@ -28,6 +30,7 @@ class EncuentroSeeder extends Seeder
             'tipo' => 'A pie'
         ]);
         Encuentro::create([
+            'id' => '3',
             'nombre' => 'punto de encuentro 3',
             'descripcion' => 'Salid Cafetales',
             'latitud' => '19.329180971835818',
@@ -35,6 +38,7 @@ class EncuentroSeeder extends Seeder
             'tipo' => 'A pie'
         ]);
         Encuentro::create([
+            'id' => '4',
             'nombre' => 'punto de encuentro 4',
             'descripcion' => 'Papelería ESIME',
             'latitud' => '19.33012805142718',
@@ -42,6 +46,7 @@ class EncuentroSeeder extends Seeder
             'tipo' => 'A pie'
         ]);
         Encuentro::create([
+            'id' => '5',
             'nombre' => 'punto de encuentro 5',
             'descripcion' => 'Estacionamiento 1',
             'latitud' => '19.32877644393895',
@@ -49,6 +54,7 @@ class EncuentroSeeder extends Seeder
             'tipo' => 'Aventon'
         ]);
         Encuentro::create([
+            'id' => '6',
             'nombre' => 'punto de encuentro 6',
             'descripcion' => 'Estacionamiento 2',
             'latitud' => '19.329302896469038',
@@ -56,6 +62,7 @@ class EncuentroSeeder extends Seeder
             'tipo' => 'Aventon'
         ]);
         Encuentro::create([
+            'id' => '7',
             'nombre' => 'punto de encuentro 7',
             'descripcion' => 'Estacionamiento 3',
             'latitud' => '19.329804037205044',
@@ -63,6 +70,7 @@ class EncuentroSeeder extends Seeder
             'tipo' => 'Aventon'
         ]);
         Encuentro::create([
+            'id' => '8',
             'nombre' => 'punto de encuentro 8',
             'descripcion' => 'Las peras',
             'latitud' => '19.32860686511847',

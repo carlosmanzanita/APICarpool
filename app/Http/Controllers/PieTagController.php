@@ -6,6 +6,9 @@ use App\Models\PieTag;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+
 
 class PieTagController extends Controller
 {
@@ -30,16 +33,39 @@ class PieTagController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
 
+        try {
+            $user = Auth::user();
+            $pieTag = [
+                'pie_id' => $request->pie_id,
+                'tag_id' => $request->tag_id,
+            ];
+            $pieTag = PieTag::create($pieTag);
+            
+            $validate = Validator::make($request->all(), 
+            [
+                'pie_id' => 'required',
+                'tag_id' => 'required'
+            ]);
+
+            return $pieTag;
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
     /**
      * Display the specified resource.
      */
-    public function show(PieTag $pieTag)
+    public function show($pieTag)
     {
-        //
+        $pieTag = PieTag::where('baja',0)->where('id',$pieTag)->get();
+        return $pieTag;
     }
+
 
     /**
      * Show the form for editing the specified resource.

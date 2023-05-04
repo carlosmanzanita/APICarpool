@@ -39,7 +39,6 @@ class EncuentroController extends Controller
             
             $validate = Validator::make($request->all(), 
             [
-                'id' => 'required',
                 'nombre' => 'required',
                 'descripcion' => 'required',
                 'latitud' => 'required',

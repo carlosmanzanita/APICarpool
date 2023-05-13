@@ -51,9 +51,12 @@ class AuthController extends Controller
                     'message' => 'Error de validación',
                     'errors' => $validateUser->errors()
                 ], 401);
-            }
+
+                
+            $datos_alumno->escuela;
+            if( $datos_alumno->escuela == 'ESIME CULHUACAN' && $datos_alumno->escuela != ""){
             $contrasegna = $datos_alumno->nombre.$datos_alumno->boleta.$datos_alumno->carrera;
-            $user = User::create([
+                        $user = User::create([
                 'email' => $request->email, //$request es lo que escribe o manda el usuario
                 'telefono' => $request->telefono,
 
@@ -71,6 +74,12 @@ class AuthController extends Controller
                 'message' => 'Usuario creado satisfactoriamente',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
+        }
+            return response() ->json([
+                'status' => false,
+                'message' => 'No pertenece a esta unidad academica',
+                 ], 401);
+        }
 
         } catch (\Throwable $th) {
             return response()->json([
@@ -98,9 +107,10 @@ class AuthController extends Controller
             $comando = "python webscraping.py -u $url";
             $datos_alumno = shell_exec($comando);
             $datos_alumno = json_decode($datos_alumno);
+
+            $datos_alumno->escuela;
+            if( $datos_alumno->escuela == 'ESIME CULHUACAN' && $datos_alumno->escuela != ""){
             $contrasegna = $datos_alumno->nombre.$datos_alumno->boleta.$datos_alumno->carrera;
-
-
 
             $validateUser = Validator::make($request->all(), 
             [
@@ -133,7 +143,12 @@ class AuthController extends Controller
                 'message' => 'El usuario ha iniciado sesión satisfactoriamente',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
-
+        }
+        return response() ->json([
+            'status' => false,
+            'message' => 'No pertenece a esta unidad academica',
+             ], 401);
+             
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,

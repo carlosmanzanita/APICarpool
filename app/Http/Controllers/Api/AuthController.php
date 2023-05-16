@@ -54,7 +54,7 @@ class AuthController extends Controller
 
                 
             $datos_alumno->escuela;
-            if( $datos_alumno->escuela == 'ESIME CULHUACAN' && $datos_alumno->escuela != ""){
+            if( $datos_alumno->escuela == 'ESIME UNIDAD CULHUACAN' && $datos_alumno->escuela != ""){
             $contrasegna = $datos_alumno->nombre.$datos_alumno->boleta.$datos_alumno->carrera;
                         $user = User::create([
                 'email' => $request->email, //$request es lo que escribe o manda el usuario

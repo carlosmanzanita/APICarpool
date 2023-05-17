@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('aventons', function (Blueprint $table) {
             $table->id();
             $table->string('asientos');
-            $table->foreignId('confirmar_id')->references('id')->on('confirmars');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('encuentro_id')->references('id')->on('encuentros');
             $table->foreignId('destino_id')->references('id')->on('destinos');
             $table->foreignId('auto_id')->references('id')->on('autos');
             $table->foreignId('modalidad_id')->references('id')->on('modalidads');
+            $table->integer('baja')->default(0);
             $table->timestamps();
         });
     }

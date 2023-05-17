@@ -10,7 +10,6 @@ class Aventon extends Model
     use HasFactory;
     protected $fillable = [
         'asientos',
-        'confirmar_id',
         'user_id',
         'encuentro_id',
         'destino_id',
@@ -18,4 +17,20 @@ class Aventon extends Model
         'modalidad_id',
     ];
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function encuentro(){
+        return $this->belongsTo(Encuentro::class);
+    }
+    public function destino(){
+        return $this->belongsTo(Destino::class);
+    }
+    public function auto(){
+        return $this->belongsTo(Auto::class);
+    }
+    public function modalidad(){
+        return $this->belongsTo(Modalidad::class);
+    }
 }

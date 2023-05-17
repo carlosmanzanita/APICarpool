@@ -13,12 +13,6 @@ class ConfirmarSeeder extends Seeder
      */
     public function run(): void
     {
-        Confirmar::create([
-            'confirma' => 'Si'
-        ]);
-
-        Confirmar::create([
-            'confirma' => 'No'
-        ]);
+        //
     }
 }

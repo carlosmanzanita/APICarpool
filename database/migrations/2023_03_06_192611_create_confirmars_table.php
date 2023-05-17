@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('confirmars', function (Blueprint $table) {
             $table->id();
-            $table->string('confirma');
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('aventon_id')->references('id')->on('aventons');
+            // $table->string('confirma');
             $table->timestamps();
         });
     }

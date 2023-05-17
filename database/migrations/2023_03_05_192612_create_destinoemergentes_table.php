@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('destinoemergentes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('confirmar_id')->references('id')->on('confirmars');
+            // $table->foreignId('confirmar_id')->references('id')->on('confirmars');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('aventon_id')->references('id')->on('aventons');
             $table->foreignId('destino_id')->references('id')->on('destinos');

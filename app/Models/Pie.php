@@ -12,7 +12,6 @@ class Pie extends Model
         'user_id',
         'encuentro_id',
         'destino_id',
-        'confirmar_id'
     ];
 
     public function user(){
@@ -24,7 +23,5 @@ class Pie extends Model
     public function destino(){
         return $this->belongsTo(Destino::class);
     }
-    public function modalidad(){
-        return $this->belongsTo(Modalidad::class);
-    }
+
 }

@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('encuentro_id')->references('id')->on('encuentros');
             $table->foreignId('destino_id')->references('id')->on('destinos');
             // $table->foreignId('confirmar_id')->references('id')->on('confirmars');
+            $table->integer('baja')->default(0);
             $table->timestamps();
         });
     }

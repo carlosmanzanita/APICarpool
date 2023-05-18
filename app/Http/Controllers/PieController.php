@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pie;
+use App\Models\PieTag;
+use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class PieController extends Controller
 {
@@ -14,7 +17,7 @@ class PieController extends Controller
      */
     public function index()
     {
-        return Pie::all();
+        return Pie::whit("user","encuentro","destino")->Where("baja", 0)->get();
     }
 
     /**
@@ -30,7 +33,23 @@ class PieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $destino_id =$request->destino_id;
+        $encuentro_id = $request->encuentro_id;
+        $user = Auth::user();
+        $pie = Pie::create([
+            "destino_id" => $destino_id,
+            "encuentro_id" => $encuentro_id,
+            "user_id" => $user->id,
+        ]);
+        $tags = $request->tags;
+            foreach ($tags as $key => $value){
+            $eltag = Tag::where ("nombre", $value)->first();
+            PieTag::create([
+                "pie_id"=> $pie->id,
+                "tag_id" => $eltag->id,
+            ]);
+        }
+    return $pie;
     }
 
     /**

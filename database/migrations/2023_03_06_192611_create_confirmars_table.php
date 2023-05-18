@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('aventon_id')->references('id')->on('aventons');
+            $table->foreignId('pie_id')->references('id')->on('pies');
             // $table->string('confirma');
             $table->timestamps();
         });

@@ -14,4 +14,17 @@ class Pie extends Model
         'destino_id',
         'confirmar_id'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    public function encuentro(){
+        return $this->belongsTo(Encuentro::class);
+    }
+    public function destino(){
+        return $this->belongsTo(Destino::class);
+    }
+    public function modalidad(){
+        return $this->belongsTo(Modalidad::class);
+    }
 }

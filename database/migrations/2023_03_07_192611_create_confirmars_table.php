@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('confirmars', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('aventon_id')->references('id')->on('aventons');
-            $table->foreignId('pie_id')->references('id')->on('pies');
-            // $table->string('confirma');
+            $table->foreignId('aventon_id')->references('id')->on('aventons')->nulleable();
+            $table->foreignId('pie_id')->references('id')->on('pies')->nulleable();
+            $table->integer('confirma')->default(0);//0 solicitado, 1 aceptado, 2 rechazado 
             $table->timestamps();
         });
     }

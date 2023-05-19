@@ -9,12 +9,13 @@ class Destinoemergente extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nombre',
-        'latitud',
-        'longitud',
-        'tipo',
-        'baja',
         'user_id',
-        
+        'aventon_id',
+        'destino_id',
     ];
+
+    public function destino(){
+        return $this->belongsTo(Destino::class);
+        // return $this->belongsTo(Destino::class, 'destino_id', 'id');
+    }
 }

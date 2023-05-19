@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Aventon;
 use App\Models\AventonTag;
+use App\Models\Confirmar;
+use App\Models\Destinoemergente;
 use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AventonController extends Controller
 {
@@ -17,16 +20,28 @@ class AventonController extends Controller
      */
     public function index()
     {
-        return Aventon::with("user","encuentro","destino","auto","modalidad")->
-        where("baja", 0)->get();
-    }
+        $aventones = Aventon::with("user","encuentro","destino","auto","modalidad")->where("baja", 0)->get()->toArray();
+        
+        foreach ($aventones as $key => $aventon) {
+            $solicitando = Confirmar::with("user")
+            ->where('aventon_id', $aventones[$key]['id'])
+            ->where('confirma','<>', 2)
+            ->get();
+            $aventones[$key]['solicitando'] = $solicitando;
+            
+            foreach ($aventones[$key]['solicitando'] as $key2 => $value2) {
+                $destino_emergente = Destinoemergente::with('destino')
+                ->where('user_id', $value2->user_id)
+                ->where('aventon_id', $value2->aventon_id)
+                ->first();
+                $aventones[$key]['solicitando'][$key2]['destino_emergente'] = $destino_emergente;
+            }
+        }
+        
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+
+        $user_id = Auth::user()->id;
+        return compact('aventones', 'user_id');
     }
 
     /**
@@ -59,9 +74,6 @@ class AventonController extends Controller
     return $aventon;
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Aventon $aventon)
     {
         //
@@ -78,9 +90,19 @@ class AventonController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Aventon $aventon)
+    public function update(Request $request, $aventon_id)
     {
-        //
+        $confirma = Confirmar::create([
+            'user_id' => $request->user_id,
+            'aventon_id' => $aventon_id,
+        ]);
+
+        $destino_emergente = Destinoemergente::create([
+            'user_id' => $request->user_id,
+            'aventon_id' => $aventon_id,
+            'destino_id' => $request->destino_id,
+        ]);
+        return $confirma;
     }
 
     /**
@@ -89,5 +111,12 @@ class AventonController extends Controller
     public function destroy(Aventon $aventon)
     {
         //
+    }
+
+    public function confirmarSolicitud(Request $request, $aventon_id){
+        $confirmadillo = Confirmar::where('aventon_id', $aventon_id)->where('user_id', $request->user_id)->first();
+        $confirmadillo->confirma = $request->estado;
+        $confirmadillo->save();
+        return $confirmadillo;
     }
 }

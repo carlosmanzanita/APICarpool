@@ -71,6 +71,10 @@ Route::resource('destinoemergente', DestinoemergenteController::class)
 ->middleware('auth:sanctum')
 ->names('destinoemergente');
 
+Route::put('confirma-solicitud/{aventon_id}', [AventonController::class, 'confirmarSolicitud'])
+->middleware('auth:sanctum')
+->name('confirma-solicitud');
+
 Route::resource('aventon', AventonController::class)
 ->middleware('auth:sanctum')
 ->names('aventon');

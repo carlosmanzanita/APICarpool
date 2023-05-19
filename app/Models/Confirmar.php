@@ -9,6 +9,13 @@ class Confirmar extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'confirma'
+        'user_id',
+        'aventon_id',
+        'pie_id',
+        'confirma',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

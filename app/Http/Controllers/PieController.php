@@ -81,6 +81,10 @@ class PieController extends Controller
      */
     public function destroy(Pie $pie)
     {
-        //
+        {
+            $pie->baja = 1;
+            $pie->save();
+            return $pie;
+        }
     }
 }

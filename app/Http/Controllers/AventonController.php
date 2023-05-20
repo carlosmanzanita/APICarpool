@@ -20,12 +20,15 @@ class AventonController extends Controller
      */
     public function index()
     {
-        $aventones = Aventon::with("user","encuentro","destino","auto","modalidad")->where("baja", 0)->get()->toArray();
+        $aventones = Aventon::with("user","encuentro","destino","auto","modalidad")->where("baja", 0)
+        ->where('baja', 0)
+        ->get()
+        ->toArray();
         
+        // ->where('confirma','<>', 2)
         foreach ($aventones as $key => $aventon) {
             $solicitando = Confirmar::with("user")
             ->where('aventon_id', $aventones[$key]['id'])
-            ->where('confirma','<>', 2)
             ->get();
             $aventones[$key]['solicitando'] = $solicitando;
             
@@ -40,8 +43,10 @@ class AventonController extends Controller
         
 
 
-        $user_id = Auth::user()->id;
-        return compact('aventones', 'user_id');
+        $user = Auth::user();
+        $user_id = $user->id;
+        $user_name = $user->name;
+        return compact('aventones', 'user_id','user_name');
     }
 
     /**
@@ -110,7 +115,9 @@ class AventonController extends Controller
      */
     public function destroy(Aventon $aventon)
     {
-        //
+        $aventon->baja = 1;
+        $aventon->save();
+        return $aventon;
     }
 
     public function confirmarSolicitud(Request $request, $aventon_id){

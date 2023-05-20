@@ -16,7 +16,9 @@ class DestinoController extends Controller
      */
     public function index()
     {
-        return Destino::where('baja',0)->get();
+        
+        $user = Auth::user();
+        return Destino::where('baja',0)->where('user_id', $user->id)->get();
     }
 
 

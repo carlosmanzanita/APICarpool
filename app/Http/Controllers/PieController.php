@@ -17,7 +17,16 @@ class PieController extends Controller
      */
     public function index()
     {
-        return Pie::whit("user","encuentro","destino")->Where("baja", 0)->get();
+        $pies = Pie::with("user","encuentro","destino")->where("baja", 0)
+        ->where('baja', 0)
+        ->get()
+        ->toArray();
+        
+        $user = Auth::user();
+        $user_id = $user->id;
+        $user_name = $user->name;
+        return compact('pies', 'user_id','user_name');
+        // return Pie::whit("user","encuentro","destino")->Where("baja", 0)->get();
     }
 
     /**

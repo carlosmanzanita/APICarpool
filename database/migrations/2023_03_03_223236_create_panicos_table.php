@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('panicos', function (Blueprint $table) {    
             $table->id();
             $table->time('hora');
-            $table->string('ubicacion');
+            $table->string('latitud');
+            $table->string('longitud');
+            $table->integer('activo')->default(1);//mona
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });

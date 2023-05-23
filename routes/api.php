@@ -91,6 +91,25 @@ Route::resource('aventon-tag', AventonTagController::class)
 ->middleware('auth:sanctum')
 ->names('aventon-tag');
 
+
+
+Route::put('activacion-panico', [PieController::class, 'activacionPanico'])
+->middleware('auth:sanctum')
+->name('activacion-panico');
+
+Route::get('panicos-activados', [PieController::class, 'panicosActivados'])
+->middleware('auth:sanctum')
+->name('panicos-activados');
+
+Route::get('quitar-panico', [PieController::class, 'quitarPanico'])
+->middleware('auth:sanctum')
+->name('quitar-panico');
+
+
+
 Route::resource('pie-tag', PieTagController::class)
 ->middleware('auth:sanctum')
 ->names('pie-tag');
+
+
+

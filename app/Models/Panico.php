@@ -10,7 +10,12 @@ class Panico extends Model
     use HasFactory;
     protected $fillable = [
         'hora',
-        'ubicacion',
+        'latitud',
+        'longitud',
         'user_id'   
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

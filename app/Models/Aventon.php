@@ -33,4 +33,7 @@ class Aventon extends Model
     public function modalidad(){
         return $this->belongsTo(Modalidad::class);
     }
+    public function aventonTag(){
+        return $this->hasMany(AventonTag::class);
+    }   
 }

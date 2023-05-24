@@ -19,7 +19,7 @@ class PieController extends Controller
      */
     public function index()
     {
-        $pies = Pie::with("user","encuentro","destino")->where("baja", 0)
+        $pies = Pie::with("user","encuentro","destino", "pieTag","pieTag.tag")->where("baja", 0)
         ->where('baja', 0)
         ->get()
         ->toArray();

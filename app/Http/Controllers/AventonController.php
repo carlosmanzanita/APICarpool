@@ -20,7 +20,7 @@ class AventonController extends Controller
      */
     public function index()
     {
-        $aventones = Aventon::with("user","encuentro","destino","auto","modalidad")->where("baja", 0)
+        $aventones = Aventon::with("user","encuentro","destino","auto","modalidad", "aventonTag","aventonTag.tag")->where("baja", 0)
         ->where('baja', 0)
         ->get()
         ->toArray();

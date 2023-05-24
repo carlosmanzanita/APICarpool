@@ -23,5 +23,8 @@ class Pie extends Model
     public function destino(){
         return $this->belongsTo(Destino::class);
     }
+    public function pieTag(){
+        return $this->hasMany(PieTag::class);
+    }
 
 }

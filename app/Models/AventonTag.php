@@ -12,4 +12,7 @@ class AventonTag extends Model
         'aventon_id',
         'tag_id',
     ];
+    public function tag(){
+        return $this->belongsTo(Tag::class);
+    }  
 }

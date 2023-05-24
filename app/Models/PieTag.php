@@ -12,4 +12,7 @@ class PieTag extends Model
         'pie_id',
         'tag_id'
     ];
+    public function tag(){
+        return $this->belongsTo(Tag::class);
+    }  
 }

@@ -54,6 +54,7 @@ class AventonController extends Controller
      */
     public function store(Request $request)
     {
+        date_default_timezone_set('America/Mexico_City');
         $asientos = $request->asientos;
         $auto_id = $request->auto_id;
         $destino_id = $request->destino_id;

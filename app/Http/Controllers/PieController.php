@@ -49,6 +49,7 @@ class PieController extends Controller
      */
     public function store(Request $request)
     {
+        date_default_timezone_set('America/Mexico_City');
         $destino_id =$request->destino_id;
         $encuentro_id = $request->encuentro_id;
         $user = Auth::user();
@@ -92,6 +93,7 @@ class PieController extends Controller
         $confirma = Confirmar::create([
             'user_id' => $request->user_id,
             'pie_id' => $pie_id,
+            'confirma' => 1,
         ]);
         return $confirma;
     }

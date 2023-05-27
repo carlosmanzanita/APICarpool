@@ -49,5 +49,6 @@ class TagSeeder extends Seeder
             'nombre' => 'Toretto',
             'descripcion' => 'Este usuario suele manejar rápido, tomalo en cuenta',
         ]);
+        
     }
 }

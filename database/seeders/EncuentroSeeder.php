@@ -36,14 +36,14 @@ class EncuentroSeeder extends Seeder
         ]);
         Encuentro::create([
             'nombre' => 'Papelería Esime (Pie)',
-            'descripcion' => 'Mod. Pie',
+            'descripcion' => 'Preferible Mod. Pie',
             'latitud' => '19.33012805142718',
             'longitud' => '-99.11279306474404',
             'tipo' => 'A pie'
         ]);
         Encuentro::create([
             'nombre' => 'Papelería ESIME, CAE (Pie)',
-            'descripcion' => 'Mod. Pie',
+            'descripcion' => 'Preferible Mod. Pie',
             'latitud' => '19.33012805142718',
             'longitud' => '-99.11279306474404',
             'tipo' => 'A pie'
@@ -71,7 +71,7 @@ class EncuentroSeeder extends Seeder
         ]);
         Encuentro::create([
             'nombre' => 'La higuera solar(pie)',
-            'descripcion' => 'Mod. Aventón',
+            'descripcion' => 'Preferible Mod. Pie',
             'latitud' => '19.32860686511847',
             'longitud' => '-99.11263676074815',
             'tipo' => 'Aventon'

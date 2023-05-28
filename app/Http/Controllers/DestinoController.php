@@ -27,13 +27,13 @@ class DestinoController extends Controller
      */
     public function store(Request $request)
     {
+        return "torpene";
         try{
         $user = Auth::user();
         $destino_nuevo = [
             'nombre' => $request->nombre,
             'latitud' => $request->latitud,
             'longitud' => $request->longitud,
-            //'tipo' => $request->tipo,
             'user_id' => $user->id,
         ];
         $destino = Destino::create($destino_nuevo);
@@ -43,7 +43,6 @@ class DestinoController extends Controller
                 'nombre' => 'required',
                 'latitud' => 'required',
                 'longitud' => 'required',
-                //'tipo' => 'required'
             ]);
         return $destino;
         } catch(\Throwable $th) {

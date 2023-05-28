@@ -27,7 +27,6 @@ class DestinoController extends Controller
      */
     public function store(Request $request)
     {
-        return "torpene";
         try{
         $user = Auth::user();
         $destino_nuevo = [

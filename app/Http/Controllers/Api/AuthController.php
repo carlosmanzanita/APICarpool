@@ -53,7 +53,7 @@ class AuthController extends Controller
                 ], 401);
             }
                 
-            if( $datos_alumno->escuela == 'ESIME UNIDAD CULHUACAN'|| 'CULHUAC&Aacute;N' && $datos_alumno->escuela != ""){
+            if( $datos_alumno->escuela == 'ESIME UNIDAD CULHUACAN'|| 'ESIME UNIDAD CULHUAC&Aacute;N' && $datos_alumno->escuela != ""){
             $contrasegna = $datos_alumno->nombre.$datos_alumno->boleta.$datos_alumno->carrera;
                         $user = User::create([
                 'email' => $request->email, //$request es lo que escribe o manda el usuario
@@ -108,7 +108,7 @@ class AuthController extends Controller
             $datos_alumno = json_decode($datos_alumno);
 
             $datos_alumno->escuela;
-            if( $datos_alumno->escuela == 'ESIME UNIDAD CULHUACAN'|| 'CULHUAC&Aacute;N' && $datos_alumno->escuela != ""){
+            if( $datos_alumno->escuela == 'ESIME UNIDAD CULHUACAN'|| 'ESIME UNIDAD CULHUAC&Aacute;N' && $datos_alumno->escuela != ""){
             $contrasegna = $datos_alumno->nombre.$datos_alumno->boleta.$datos_alumno->carrera;
 
             $validateUser = Validator::make($request->all(), 

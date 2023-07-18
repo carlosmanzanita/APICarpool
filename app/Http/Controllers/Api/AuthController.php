@@ -177,7 +177,7 @@ class AuthController extends Controller
         // Cierre de sesión
         $mes= date("m"); 
         if($mes==7 || $mes==12)
-        {$this->logoutUser($request);}
+        // {$this->logoutUser($request);}
         
         $usuario = Auth::user();
         return $usuario;

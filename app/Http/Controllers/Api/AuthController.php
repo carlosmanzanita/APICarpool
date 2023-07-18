@@ -172,9 +172,18 @@ class AuthController extends Controller
         }
     }
 
-    public function verSesion()
+    public function verSesion(Request $request)
     {
+        // Cierre de sesión
+        $mes= date("m"); 
+        if(
+            $mes==7 || $mes==12
+        )
+        {
+            // $this->logoutUser($request)
+        }
         $usuario = Auth::user();
         return $usuario;
     }
+    
 }

@@ -13,6 +13,7 @@ class Confirmar extends Model
         'aventon_id',
         'pie_id',
         'confirma',
+        'viaje'
     ];
 
     public function user(){

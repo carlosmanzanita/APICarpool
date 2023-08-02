@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('telefono')->unique();
-            $table->string('boleta');
+            $table->string('boleta')->unique();
             $table->string('carrera');
             $table->string('escuela');
             $table->string('vigencia');

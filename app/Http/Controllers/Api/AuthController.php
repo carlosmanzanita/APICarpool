@@ -52,9 +52,17 @@ class AuthController extends Controller
                     'errors' => $validateUser->errors()
                 ], 401);
             }
-                
-            if( $datos_alumno->escuela == 'ESIME UNIDAD CULHUACAN'|| 'ESIME UNIDAD CULHUAC&Aacute;N' && $datos_alumno->escuela != ""){
-            $contrasegna = $datos_alumno->nombre.$datos_alumno->boleta.$datos_alumno->carrera;
+                //Validación de escuelas
+            if( 
+                $datos_alumno->escuela != ""
+                && 
+                ( 
+                    $datos_alumno->escuela == 'ESIME UNIDAD CULHUACAN'
+                    || 
+                    $datos_alumno->escuela == 'ESIME UNIDAD CULHUAC&Aacute;N' 
+                )
+            ){
+                $contrasegna = $datos_alumno->nombre.$datos_alumno->boleta.$datos_alumno->escuela;
                         $user = User::create([
                 'email' => $request->email, //$request es lo que escribe o manda el usuario
                 'telefono' => $request->telefono,

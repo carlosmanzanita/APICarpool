@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Psy\CodeCleaner\ReturnTypePass;
 
 class AventonController extends Controller
 {
@@ -80,9 +81,34 @@ class AventonController extends Controller
     return $aventon;
     }
 
-    public function show(Aventon $aventon)
+    public function show($aventon_id)
     {
-        //
+        $aventones = Aventon::with("user","encuentro","destino","auto","modalidad", "aventonTag","aventonTag.tag")->where("baja", 0)
+        ->where('baja', 2)
+        ->where('id', $aventon_id)
+        ->get()
+        ->toArray();
+        
+        // ->where('confirma','<>', 2)
+        foreach ($aventones as $key => $aventon) {
+            $solicitando = Confirmar::with("user")
+            ->where('aventon_id', $aventones[$key]['id'])
+            ->get();
+            $aventones[$key]['solicitando'] = $solicitando;
+            
+            foreach ($aventones[$key]['solicitando'] as $key2 => $value2) {
+                $destino_emergente = Destinoemergente::with('destino')
+                ->where('user_id', $value2->user_id)
+                ->where('aventon_id', $value2->aventon_id)
+                ->first();
+                $aventones[$key]['solicitando'][$key2]['destino_emergente'] = $destino_emergente;
+            }
+        }
+        
+        $user = Auth::user();
+        $user_id = $user->id;
+        $user_name = $user->name;
+        return compact('aventones', 'user_id','user_name');
     }
 
     /**
@@ -111,6 +137,12 @@ class AventonController extends Controller
         return $confirma;
     }
 
+    public function iniciarViaje(Request $request){
+        $aventon=Aventon::find($request->aventon_id);
+        $aventon->baja=2;
+        $aventon->save();
+        return $aventon;
+    }
     /**
      * Remove the specified resource from storage.
      */

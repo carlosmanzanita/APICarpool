@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('destino_id')->references('id')->on('destinos');
             $table->foreignId('auto_id')->references('id')->on('autos');
             $table->foreignId('modalidad_id')->references('id')->on('modalidads');
-            $table->integer('baja')->default(0);
+            $table->integer('baja')->default(0); // 0 - normal, 1 - inactivo, 2 - Viaje iniciado, 3 -Viaje finalizado 
             $table->timestamps();
         });
     }

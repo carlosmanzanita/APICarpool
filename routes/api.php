@@ -14,6 +14,7 @@ use App\Http\Controllers\PanicoController;
 use App\Http\Controllers\PieController;
 use App\Http\Controllers\PieTagController;
 use App\Http\Controllers\TagController;
+use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -74,6 +75,10 @@ Route::resource('destinoemergente', DestinoemergenteController::class)
 Route::put('confirma-solicitud/{aventon_id}', [AventonController::class, 'confirmarSolicitud'])
 ->middleware('auth:sanctum')
 ->name('confirma-solicitud');
+
+Route::put('iniciar-viaje/{aventon_id}',[AventonController::class, 'iniciarViaje'])
+->middleware('auth:sanctum')
+->name('iniciar-viaje');
 
 Route::resource('aventon', AventonController::class)
 ->middleware('auth:sanctum')

@@ -114,12 +114,19 @@ class AuthController extends Controller
             $comando = "python webscraping.py -u $url";
             $datos_alumno = shell_exec($comando);
             $datos_alumno = json_decode($datos_alumno);
-
             $datos_alumno->escuela;
-            if( $datos_alumno->escuela == 'ESIME UNIDAD CULHUACAN'|| 'ESIME UNIDAD CULHUAC&Aacute;N' && $datos_alumno->escuela != ""){
-            $contrasegna = $datos_alumno->nombre.$datos_alumno->boleta.$datos_alumno->carrera;
-
-            $validateUser = Validator::make($request->all(), 
+            
+            if( 
+                $datos_alumno->escuela != ""
+                && 
+                ( 
+                    $datos_alumno->escuela == 'ESIME UNIDAD CULHUACAN'
+                    || 
+                    $datos_alumno->escuela == 'ESIME UNIDAD CULHUAC&Aacute;N' 
+                )
+            ){
+                $contrasegna = $datos_alumno->nombre.$datos_alumno->boleta.$datos_alumno->escuela;
+                $validateUser = Validator::make($request->all(), 
             [
                 'email' => 'required|email',
             ]);

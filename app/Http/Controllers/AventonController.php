@@ -21,10 +21,32 @@ class AventonController extends Controller
      */
     public function index()
     {
-        $aventones = Aventon::with("user","encuentro","destino","auto","modalidad", "aventonTag","aventonTag.tag")->where("baja", 0)
-        ->where('baja', 0)
-        ->get()
-        ->toArray();
+        // CONFIRMAR SI EXISTEN AVENTONES INICIADOS (BAJA -> 2) O CREADO (BAJA->0)
+        // Modelo-BD-> Si existe, si existe entonces me regresa todo
+        
+        $user = Auth::user();
+        $user_id = $user->id;
+        $user_name = $user->name;
+        //La variable consulta trae todos los aventones que estén en estado (0 o 2) donde su usuario concuerde
+        $consulta = Aventon::select("id")->where('baja',0)->orWhere('baja',2)->where('user_id', $user_id)->get();
+        $mis_aventones=[];
+        foreach ($consulta as $key => $value) {
+            $mis_aventones[]=$value->id;
+        }
+        // return $mis_aventones;
+        if (count($mis_aventones)>0) {
+            $aventones = Aventon::with("user","encuentro","destino","auto","modalidad", "aventonTag","aventonTag.tag")
+            ->whereIn('id', $mis_aventones)
+            ->get()
+            ->toArray();
+        }
+        else {
+            $aventones = Aventon::with("user","encuentro","destino","auto","modalidad", "aventonTag","aventonTag.tag")
+            ->where('baja', 0)
+            ->get()
+            ->toArray();
+        }
+
         
         // ->where('confirma','<>', 2)
         foreach ($aventones as $key => $aventon) {
@@ -43,10 +65,6 @@ class AventonController extends Controller
         }
         
 
-
-        $user = Auth::user();
-        $user_id = $user->id;
-        $user_name = $user->name;
         return compact('aventones', 'user_id','user_name');
     }
 
@@ -83,7 +101,7 @@ class AventonController extends Controller
 
     public function show($aventon_id)
     {
-        $aventones = Aventon::with("user","encuentro","destino","auto","modalidad", "aventonTag","aventonTag.tag")->where("baja", 0)
+        $aventones = Aventon::with("user","encuentro","destino","auto","modalidad", "aventonTag","aventonTag.tag")
         ->where('baja', 2)
         ->where('id', $aventon_id)
         ->get()

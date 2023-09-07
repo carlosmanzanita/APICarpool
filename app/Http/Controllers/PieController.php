@@ -17,12 +17,52 @@ class PieController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(){
+        $user = Auth::user();
+        $user_id = $user->id;
+        $user_name = $user->name;
+        $consulta = Pie::select("id")
+            ->where('baja',2)
+            ->where('user_id',$user_id)
+            ->get()
+            ->toArray();
+        if (count($consulta)==0) {
+            return $this->getAll();
+        }
+        else {
+            return $this->show($consulta[0]["id"]);
+        }
+
+    }
+
+    public function getAll()
     {
-        $pies = Pie::with("user","encuentro","destino", "pieTag","pieTag.tag")->where("baja", 0)
-        ->where('baja', 0)
-        ->get()
-        ->toArray();
+        $user = Auth::user();
+        $user_id = $user->id;
+        $user_name = $user->name;
+        $consulta = Pie::select("id")
+            ->where('baja',0)
+            ->get();
+
+        $mis_pies=[];
+
+
+        foreach ($consulta as $key => $value) {
+            $mis_pies[]=$value->id;
+        }
+        if (count($mis_pies)>0) {
+            $pies = Pie::with("user","encuentro","destino", "pieTag","pieTag.tag")
+            ->where('id', $mis_pies)
+            ->get()
+            ->toArray();
+        }
+        else {
+            $pies=Pie::with("user","encuentro","destino", "pieTag","pieTag.tag")
+            ->where('baja',0)
+            ->get()
+            ->toArray();
+        }
+        
         foreach ($pies as $key => $pie) {
             $unirse = Confirmar::with("user")
             ->where('pie_id', $pies[$key]['id'])

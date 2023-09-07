@@ -19,16 +19,34 @@ class AventonController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        // CONFIRMAR SI EXISTEN AVENTONES INICIADOS (BAJA -> 2) O CREADO (BAJA->0)
-        // Modelo-BD-> Si existe, si existe entonces me regresa todo
-        
+    public function index(){
         $user = Auth::user();
         $user_id = $user->id;
         $user_name = $user->name;
+        $consulta = Aventon::select("id")
+        ->where('baja',2)
+        ->where('user_id', $user_id)
+        ->get()
+        ->toArray();
+        if (count($consulta)==0) {
+            // return $consulta;
+            return $this->getAll();
+        }
+        else {
+            return $this->show($consulta[0]["id"]);
+        }
+
+    }
+
+    public function getAll()
+    {
+        $user = Auth::user();
+        $user_id = $user->id;
+        $user_name = $user->name;
+        // CONFIRMAR SI EXISTEN AVENTONES INICIADOS (BAJA -> 2) O CREADO (BAJA->0)
+        // Modelo-BD-> Si existe, si existe entonces me regresa todo
+        $consulta = Aventon::select("id")->where('baja',0)->get();
         //La variable consulta trae todos los aventones que estén en estado (0 o 2) donde su usuario concuerde
-        $consulta = Aventon::select("id")->where('baja',0)->orWhere('baja',2)->where('user_id', $user_id)->get();
         $mis_aventones=[];
         foreach ($consulta as $key => $value) {
             $mis_aventones[]=$value->id;

@@ -45,18 +45,46 @@ class AventonController extends Controller
         $user_name = $user->name;
         // CONFIRMAR SI EXISTEN AVENTONES INICIADOS (BAJA -> 2) O CREADO (BAJA->0)
         // Modelo-BD-> Si existe, si existe entonces me regresa todo
-        $consulta = Aventon::select("id")->where('baja',0)->get();
+
+        // $consulta = Aventon::select("id")
+        // ->where('baja',0)
+        // ->orderBy('created_at')
+        // ->get();
+
+        $consulta1 = Aventon::select("id")
+        ->where('baja',0)
+        ->where('user_id',$user_id)
+        ->orderBy('created_at')
+        ->get();
+
+        $consulta2 = Aventon::select("id")
+        ->where('baja',0)
+        ->where('user_id',"<>",$user_id)
+        ->orderBy('created_at')
+        ->get();
         //La variable consulta trae todos los aventones que estén en estado (0 o 2) donde su usuario concuerde
         $mis_aventones=[];
-        foreach ($consulta as $key => $value) {
+        foreach ($consulta1 as $key => $value) {
+            $mis_aventones[]=$value->id;
+        }
+        foreach ($consulta2 as $key => $value) {
             $mis_aventones[]=$value->id;
         }
         // return $mis_aventones;
+            $aventones=[];
         if (count($mis_aventones)>0) {
-            $aventones = Aventon::with("user","encuentro","destino","auto","modalidad", "aventonTag","aventonTag.tag")
-            ->whereIn('id', $mis_aventones)
-            ->get()
-            ->toArray();
+            foreach ($mis_aventones as $key => $mi_aventon) {
+                $aventon = Aventon::with("user","encuentro","destino","auto","modalidad", "aventonTag","aventonTag.tag")
+                ->where('id', $mi_aventon)
+                ->first()
+                ->toArray();
+                $aventones[]=$aventon;
+
+            }
+            // $aventones = Aventon::with("user","encuentro","destino","auto","modalidad", "aventonTag","aventonTag.tag")
+            // ->whereIn('id',[$mis_aventones])
+            // ->get()
+            // ->toArray();
         }
         else {
             $aventones = Aventon::with("user","encuentro","destino","auto","modalidad", "aventonTag","aventonTag.tag")

@@ -149,7 +149,9 @@ class PieController extends Controller
     }
 
     public function confirmaSolicitud(Request $request, $pie_id){
-        $confirmadillo = Confirmar::where('pie_id', $pie_id)->where('user_id', $request->user_id)->first();
+        $confirmadillo = Confirmar::where('pie_id', $pie_id)
+        ->where('user_id', $request->user_id)
+        ->first();
         $confirmadillo->confirma = $request->estado;
         $confirmadillo->save();
         return $confirmadillo;

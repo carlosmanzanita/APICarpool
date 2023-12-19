@@ -28,15 +28,27 @@ class AventonController extends Controller
         ->where('user_id', $user_id)
         ->get()
         ->toArray();
-        if (count($consulta)==0) {
+
+        $consulta3 = Destinoemergente::select("aventon_id")
+        ->where('user_id',$user_id)
+        ->where('llego', '<>', 2)
+        ->get()
+        ->toArray();
+
+        if (count($consulta)==0 && count($consulta3)==0) {
             // return $consulta;
             return $this->getAll();
         }
         else {
-            return $this->show($consulta[0]["id"]);
+            if(isset($consulta[0])){
+                return $this->show($consulta[0]['id']);
+            }else{
+                return $this->show($consulta3[0]['aventon_id']);
+            }
         }
-
     }
+
+    
 
     public function getAll()
     {
@@ -109,7 +121,6 @@ class AventonController extends Controller
                 $aventones[$key]['solicitando'][$key2]['destino_emergente'] = $destino_emergente;
             }
         }
-        
 
         return compact('aventones', 'user_id','user_name');
     }

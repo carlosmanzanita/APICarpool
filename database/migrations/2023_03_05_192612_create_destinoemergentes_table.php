@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('aventon_id')->references('id')->on('aventons');
             $table->foreignId('destino_id')->references('id')->on('destinos');
+            $table->integer('llego')->default(0); // 0 - normal, 1 - llegó 
             $table->timestamps();
         });
     }

@@ -12,6 +12,7 @@ class Destinoemergente extends Model
         'user_id',
         'aventon_id',
         'destino_id',
+        'llego'
     ];
 
     public function destino(){
